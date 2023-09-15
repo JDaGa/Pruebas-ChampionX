@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lista Jerárquica Desplegable con Cambio de Color</title>
+    <style>
+        ul {
+            list-style-type: none;
+            padding-left: 20px;
+            display: none;
+        }
+
+        .expandable {
+            cursor: pointer;
+        }
+
+        .expanded {
+            display: block;
+        }
+
+        .color-change {
+            color: blue; /* Cambia el color aquí según tus preferencias */
+        }
+    </style>
+</head>
+<body>
+    <ul class="expandable color-change">
+        <li>Elemento 1
+            <ul class="expandable color-change">
+                <li>Subelemento 1.1</li>
+                <li>Subelemento 1.2
+                    <ul class="expandable color-change">
+                        <li>Subsubelemento 1.2.1</li>
+                        <li>Subsubelemento 1.2.2</li>
+                    </ul>
+                </li>
+                <li>Subelemento 1.3</li>
+            </ul>
+        </li>
+        <li>Elemento 2</li>
+        <li>Elemento 3
+            <ul class="expandable color-change">
+                <li>Subelemento 3.1</li>
+            </ul>
+        </li>
+    </ul>
+
+    <script>
+        // Agregar función de expansión/contracción y cambio de color a elementos de lista con clase "expandable"
+        const expandableElements = document.querySelectorAll('.expandable');
+        expandableElements.forEach((element) => {
+            element.classList.add('closed'); // Inicialmente, ocultar la lista
+            const toggleButton = document.createElement('span');
+            toggleButton.innerText = '▼'; // Ícono de flecha hacia abajo
+            toggleButton.classList.add('expand-button');
+            toggleButton.addEventListener('click', () => {
+                element.classList.toggle('closed');
+                toggleButton.innerText = element.classList.contains('closed') ? '▼' : '▲'; // Cambiar el ícono
+                element.classList.toggle('expanded'); // Mostrar u ocultar la lista
+                element.classList.toggle('color-change'); // Cambiar el color
+            });
+            element.parentNode.insertBefore(toggleButton, element);
+        });
+    </script>
+</body>
+</html>
+
